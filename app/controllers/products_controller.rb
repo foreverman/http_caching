@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     expires_in 1.minutes
-    fresh_when @product
+    fresh_when etag: @product, last_modified: @product.updated_at, public: true
   end
 
   def new
